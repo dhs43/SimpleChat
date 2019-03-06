@@ -69,13 +69,6 @@ public class ChatActivity extends AppCompatActivity {
             login();
         }
 
-
-        setContentView(R.layout.activity_chat);
-        if (ParseUser.getCurrentUser() != null) {
-            startWithCurrentUser();
-        } else {
-            login();
-        }
         myHandler.postDelayed(mRefreshMessagesRunnable, POLL_INTERVAL);
 
 
@@ -188,12 +181,12 @@ public class ChatActivity extends AppCompatActivity {
             public void done(List<Message> messages, ParseException e) {
                 if (e == null) {
                     mMessages.clear();
+                    if (messages.size() > 0) {
+                        Log.e("testing", messages.get(0).toString());
+                    }else{
+                        Log.e("testing", "No messages");
+                    }
                     mMessages.addAll(messages);
-//                    Message myMessage;
-//                    myMessage.
-//                    mMessages.add()
-
-                    Log.d("messages4: ", "hi " + messages.toString());
                     mAdapter.notifyDataSetChanged(); // update adapter
                     // Scroll to the bottom of the list on initial load
                     if (mFirstLoad) {
