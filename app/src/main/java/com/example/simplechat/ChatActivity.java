@@ -24,6 +24,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SubscriptionHandling;
+import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,6 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         myHandler.postDelayed(mRefreshMessagesRunnable, POLL_INTERVAL);
-
 
 
         // Parse.initialize(...) should come first
@@ -181,11 +181,6 @@ public class ChatActivity extends AppCompatActivity {
             public void done(List<Message> messages, ParseException e) {
                 if (e == null) {
                     mMessages.clear();
-                    if (messages.size() > 0) {
-                        Log.e("testing", messages.get(0).toString());
-                    }else{
-                        Log.e("testing", "No messages");
-                    }
                     mMessages.addAll(messages);
                     mAdapter.notifyDataSetChanged(); // update adapter
                     // Scroll to the bottom of the list on initial load
